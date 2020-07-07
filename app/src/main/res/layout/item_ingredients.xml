@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+
+
+
+    <TextView
+        android:id="@+id/tv_ingredientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_margin="10dp"
+        android:text="Tôm sú"
+        android:textColor="@color/md_black_1000"
+        android:fontFamily="@font/open_sans_light"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_margin="10dp"
+        android:textColor="@color/md_black_1000"
+        android:fontFamily="@font/open_sans_light"
+        android:text="100 gram"
+        android:textSize="14sp" />
+
+</LinearLayout>
