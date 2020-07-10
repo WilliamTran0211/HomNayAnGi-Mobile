@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -21,9 +23,11 @@ import com.cuongtt.homnayangi.activities.RecipeDetailActivity;
 import com.cuongtt.homnayangi.models.Recipes;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeItemViewHolder> {
+public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeItemViewHolder>  {
 
     private List<Recipes> recipesList;
     private Context context;
@@ -83,6 +87,39 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         return recipesList.size();
     }
 
+//    @Override
+//    public Filter getFilter() {
+//        return myFilter;
+//    }
+//
+//    private Filter myFilter = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence charSequence) {
+//            ArrayList<Recipes> filterList = new ArrayList<>();
+//            if(charSequence == null || charSequence.length() == 0){
+//                filterList.addAll(recipesList);
+//            } else{
+//                String filterPattern = charSequence.toString().toLowerCase().trim();
+//
+//                for(Recipes item : recipesList){
+//                    if(item.getTitle().toLowerCase().contains(filterPattern)){
+//                        filterList.add(item);
+//                    }
+//                }
+//            }
+//            FilterResults results = new FilterResults();
+//            results.values = filterList;
+//            return results;
+//        }
+//
+//        @Override
+//        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//            recipesList.clear();
+//            recipesList.addAll((ArrayList) filterResults.values);
+//            notifyDataSetChanged();
+//        }
+//    };
+
     public static class RecipeItemViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
@@ -98,7 +135,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
             img_recipes = itemView.findViewById(R.id.img_recipe);
             tv_recipes_title = itemView.findViewById(R.id.tv_title);
             tv_recipes_summary = itemView.findViewById(R.id.tv_summary);
-            rating = itemView.findViewById(R.id.rating);
+//            rating = itemView.findViewById(R.id.rating);
 
         }
     }

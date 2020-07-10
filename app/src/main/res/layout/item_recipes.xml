@@ -47,19 +47,6 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="24sp" />
 
-            <RatingBar
-                android:id="@+id/rating"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:isIndicator="true"
-                android:elevation="5dp"
-                android:numStars="5"
-                android:stepSize="0.1">
-            </RatingBar>
 
             <TextView
                 android:id="@+id/tv_summary"

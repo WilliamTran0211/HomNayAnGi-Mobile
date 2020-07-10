@@ -59,13 +59,13 @@ public class LoginActivity extends AppCompatActivity {
         String json = mPrefs.getString("user_info", "");
         Users obj = gson.fromJson(json, Users.class);
 
-        if(obj.isValid()){
-            Intent intent_main = new Intent(LoginActivity.this, MainActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("UserInfo",  json);
-            intent_main.putExtras(bundle);
-            startActivity(intent_main);
-        }
+//        if(obj.isValid()){
+//            Intent intent_main = new Intent(LoginActivity.this, MainActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("UserInfo",  json);
+//            intent_main.putExtras(bundle);
+//            startActivity(intent_main);
+//        }
     }
 
     private void addEvents() {

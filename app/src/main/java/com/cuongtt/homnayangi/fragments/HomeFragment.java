@@ -143,7 +143,12 @@ public class HomeFragment extends Fragment {
     private void getRecipesImages(){
         System.out.println("run here getRecipesImages - " + recipes_list.toString());
         for(final Recipes item : recipes_list){
-            String imgRecipeName = item.getImages().get(0);
+            String imgRecipeName = "";
+
+            if(item.getImages() != null){
+               imgRecipeName = item.getImages().get(0);
+            }
+
             String id = item.getId().toString();
             System.out.println("run here getRecipesImages - " +id + " - "+ imgRecipeName);
             mAPIService.getRecipeImages(id).enqueue(new Callback<FileResults>() {
