@@ -3,4 +3,4 @@ Author: Tran Tien Cuong
 
 Purpose: This is a project of my graduate thesis.
 
-Description: This application is used for Client-side
+Description:A mobile application for Client-side
