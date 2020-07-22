@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Build;
@@ -23,6 +24,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +43,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cuongtt.homnayangi.FileUtils;
 import com.cuongtt.homnayangi.R;
+import com.cuongtt.homnayangi.adapters.ImageAdapter;
 import com.cuongtt.homnayangi.adapters.IngredientsAdapter;
 import com.cuongtt.homnayangi.adapters.InstructionsAdapter;
 import com.cuongtt.homnayangi.models.Ingredients;
@@ -84,14 +88,18 @@ public class AddRecipeDialog extends DialogFragment {
     Button btnAddIngredient, btnAddInstruction, btnAddImage;
     CheckBox chDishType_morning, chDishType_noon, chDishType_night;
 
+    GridView gridImages;
+
     IngredientsAdapter ingredientsAdapter;
     InstructionsAdapter instructionsAdapter;
+    ImageAdapter imgAdapter ;
 
     Ingredients ingredientItem;
     RecipesIngredients recipesIngredientsItem;
     ArrayList<RecipesIngredients> ListIngredientsOfRecipe = new ArrayList<RecipesIngredients>();
     ArrayList<String> ListInstructions = new ArrayList<String>();
     ArrayList<MultipartBody.Part> ListImage = new ArrayList<MultipartBody.Part>();
+    ArrayList<Bitmap> gridViewImageList = new ArrayList<>();
 
     Toolbar toolbar;
 
@@ -158,6 +166,11 @@ public class AddRecipeDialog extends DialogFragment {
             actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
         }
         setHasOptionsMenu(true);
+
+
+        gridImages = view.findViewById(R.id.gridViewImages);
+        imgAdapter = new ImageAdapter(getActivity(), gridViewImageList);
+        gridImages.setAdapter(imgAdapter);
 
 
         return view;
@@ -332,6 +345,16 @@ public class AddRecipeDialog extends DialogFragment {
 
                 MultipartBody.Part imageRequest = prepareFilePart("images", selectedImage);
                 ListImage.add(imageRequest);
+
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                    gridViewImageList.add(bitmap);
+                    imgAdapter.notifyDataSetChanged();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
             }
     }
 
@@ -382,6 +405,7 @@ public class AddRecipeDialog extends DialogFragment {
 
         toolbar = view.findViewById(R.id.dialog_recipe_toolbar);
 
+        gridImages = view.findViewById(R.id.gridViewImages);
     }
 
     APIService mAPIService = ApiUtils.getAPIService();
@@ -568,7 +592,7 @@ public class AddRecipeDialog extends DialogFragment {
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
             }else{
-                Toast.makeText(getActivity(), "Đã cấp quyền ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Đã cấp quyền ", Toast.LENGTH_SHORT).show();
                 Log.d("debugggggggggg","has right");
             }
         }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/rowFood"
+    >
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkbox_isChecked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/txt_food_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="2"
+        android:fontFamily="@font/open_sans_light"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:text="@string/lorem_ipsum_title"/>
+
+    <TextView
+        android:id="@+id/txt_food_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="right"
+        android:fontFamily="@font/open_sans_light"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:text="@string/lorem_ipsum_title"/>
+
+    <TextView
+        android:id="@+id/txt_food_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/open_sans_light"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:gravity="right"
+        android:text="kg"/>
+
+
+</LinearLayout>

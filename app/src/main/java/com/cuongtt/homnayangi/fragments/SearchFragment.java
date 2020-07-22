@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import com.cuongtt.homnayangi.R;
@@ -41,6 +42,8 @@ public class SearchFragment extends Fragment {
     private ArrayList<Recipes> recipes_list;
     private ArrayList<Recipes> recipes_full_list;
 
+    ProgressBar loading;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -63,6 +66,9 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        loading = view.findViewById(R.id.loading);
+        loading.setVisibility(View.VISIBLE);
 
         recyclerView =  view.findViewById(R.id.rcySearch);
         searchView = view.findViewById(R.id.searchBar);
@@ -167,6 +173,8 @@ public class SearchFragment extends Fragment {
                         recipes_full_list.get(recipes_full_list.indexOf(item)).setImages(response.body().getFileUrls());
 
                         searchAdapter.notifyDataSetChanged();
+
+                        loading.setVisibility(View.GONE);
 
                     }
                 }

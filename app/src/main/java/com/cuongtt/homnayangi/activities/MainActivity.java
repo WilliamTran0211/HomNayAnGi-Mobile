@@ -3,6 +3,7 @@ package com.cuongtt.homnayangi.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,11 +19,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.drawable.DrawableResource;
 import com.cuongtt.homnayangi.R;
+import com.cuongtt.homnayangi.fragments.ContainerFragment;
 import com.cuongtt.homnayangi.fragments.HomeFragment;
 import com.cuongtt.homnayangi.fragments.SearchFragment;
 import com.cuongtt.homnayangi.fragments.UserFragment;
+import com.cuongtt.homnayangi.models.RecipesIngredients;
 import com.cuongtt.homnayangi.models.Users;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -32,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ActionBar toolbar;
-    private FloatingActionButton fab;
+    private ExtendedFloatingActionButton fab;
     private ChipNavigationBar cnb;
     private FragmentManager fragmentManager;
 
@@ -61,18 +66,10 @@ public class MainActivity extends AppCompatActivity {
         final String json = intent.getStringExtra("UserInfo");
         Users obj = gson.fromJson(json, Users.class);
 
-//        fab = findViewById(R.id.floating_button);
-//
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent_new_form = new Intent(MainActivity.this, RecipeFormActivity.class);
-//
-//                startActivity(intent_new_form);
-//
-//            }
-//        });
+        fab = findViewById(R.id.floating_button);
 
+        fab.setOnClickListener(fabAddRecipe);
+        fab.setText("Thêm công thức");
 
 
         cnb.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
@@ -82,21 +79,31 @@ public class MainActivity extends AppCompatActivity {
 
                 Bundle UserInfoBundle = new Bundle();
                 UserInfoBundle.putString("UserInfo", json);
+                fab.setVisibility(View.VISIBLE);
 
                 switch (i) {
                     case R.id.mnu_home:
                         Log.d("DEBUGGGGG","Bottom navigation HOME click");
                         fragment = new HomeFragment();
+                        fab.setOnClickListener(fabAddRecipe);
+                        fab.setText("Thêm công thức");
                         break;
                     case R.id.mnu_search:
                         Log.d("DEBUGGGGG","Bottom navigation SEARCH click");
                         fragment = new SearchFragment();
+                        fab.setVisibility(View.GONE);
                         break;
                     case R.id.mnu_user:
                         Log.d("DEBUGGGG", "Bottom navigation USER click");
                         fragment = new UserFragment();
                         fragment.setArguments(UserInfoBundle);
-
+                        fab.setVisibility(View.GONE);
+                        break;
+                    case R.id.mnu_container:
+                        Log.d("DEBUGGGG", "Bottom navigation UserContainer click");
+                        fragment = new ContainerFragment();
+                        fab.setText("Thêm thực phẩm");
+//                        fab.setOnClickListener(fabAddFood);
                         break;
                 }
                 if(fragment != null){
@@ -114,26 +121,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            Fragment fragment;
-//
-//            switch (item.getItemId()) {
-//                case R.id.mnu_home:
-//                    Log.d("DEBUGGGGG","Bottom navigation HOME click");
-//                    fragment = new HomeFragment();
-//                    loadFragment(fragment);
-//                    return true;
-//                case R.id.mnu_user:
-//                    Log.d("DEBUGGGG", "Bottom navigation USER click");
-//                    fragment = new UserFragment();
-//                    loadFragment(fragment);
-//                    return true;
-//            }
-//            return false;
-//        }
-//    };
+    View.OnClickListener fabAddRecipe = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.d("DEBUGGGGGGGG", "ONCLICK - FAB");
+            DialogFragment newRecipeDialog = AddRecipeDialog.newInstance();
+            newRecipeDialog.show(getSupportFragmentManager(), "newRecipeDialog");
+        }
+    };
+
+    View.OnClickListener fabAddFood = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.d("DEBUGGGGGGGG", "ONCLICK - AddFood - FAB");
+            AddFoodDialog dialog = new AddFoodDialog();
+            dialog.show(getSupportFragmentManager(), "Food  dialog");
+
+        }
+    };
+
+
 
 
     private void loadFragment(Fragment fragment) {

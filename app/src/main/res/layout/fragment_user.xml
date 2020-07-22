@@ -182,6 +182,17 @@
             app:layout_constraintTop_toBottomOf="@+id/row4"
             app:layout_constraintVertical_bias="0.422" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:visibility="visible"
+        android:indeterminateDuration="@android:integer/config_longAnimTime"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/custom_progress_dialog" />
+
 </FrameLayout>

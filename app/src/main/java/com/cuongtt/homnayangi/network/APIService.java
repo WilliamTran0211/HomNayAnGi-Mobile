@@ -9,12 +9,17 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -31,11 +36,27 @@ public interface APIService {
     @POST("/api/users/login")
     Call<Users> login(@Body JsonObject body);
 
-    @POST("api/users/create")
-    Call<Users> signUp(@Body JsonObject body);
+//    @Headers({"Content-Type: multipart/form-data", "Accept: application/json"})
+//    @FormUrlEncoded
+//    @POST("/api/users/create")
+//    Call<JsonObject> signUp(@Field("email") String email, @Field("full_name") String fullName,
+//                       @Field("display_name") String displayName, @Field("password") String password,
+//                       @Field("gender") String gender, @Field("birthday") String birthday,
+//                       @Field("images") String avatar);
+    @Multipart
+    @POST("/api/users/create")
+    Call<JsonObject> signUp(@Part MultipartBody.Part email, @Part MultipartBody.Part fullName,
+                            @Part MultipartBody.Part displayName, @Part MultipartBody.Part password,
+                            @Part MultipartBody.Part birthday, @Part MultipartBody.Part gender,
+                            @Part MultipartBody.Part images);
+
+
+    @Headers({"Content-type: application/json", "Accept: */*"})
+    @POST("/api/users/check-existed")
+    Call<Users> getUserInfoWithEmailIfExisted(@Body JsonObject body);
 
     @GET("/api/users/{id}")
-    Call<Users> getUserInfo(@Path("id") String id);
+    Call<Users> getUserInfoWithID(@Path("id") String id);
 
     //Recipes APIs
     @Headers({"Content-type: application/json", "Accept: */*"})
@@ -79,5 +100,18 @@ public interface APIService {
     @GET("api/recipies/ingredients/")
     Call<JsonArray> getIngrdientsList();
 
+
+    //food container
+    @Headers({"Content-type: application/json", "Accept: */*"})
+    @GET("api/container/")
+    Call<JsonArray> getUserFood(@Query("user") String userID);
+
+    @Headers({"Content-type: application/json", "Accept: */*"})
+    @POST("api/container/{userID}/addFood")
+    Call<JsonObject> addFoodToContainer(@Path("userID") String userID, @Body JsonObject body);
+
+    @Headers({"Content-type: application/json", "Accept: */*"})
+    @DELETE("api/container/{foodID}/delete")
+    Call<JsonObject> deleteFood(@Path("foodID") String id);
 
 }

@@ -10,24 +10,28 @@
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
-        tools:layout_editor_absoluteX="0dp"></FrameLayout>
+        tools:layout_editor_absoluteX="0dp"/>
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/floating_button"-->
-<!--        style="@style/Widget.MaterialComponents.FloatingActionButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="end"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:src="@drawable/ic_create_white_48dp"-->
-<!--        app:backgroundTint="@color/colorPrimary"-->
-<!--        app:elevation="0dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/navigation"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_insetEdge="bottom"-->
-<!--        app:tint="@color/md_white_1000" />-->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/floating_button"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_create_white_48dp"
+        android:fontFamily="@font/open_sans_light"
+        app:backgroundTint="@color/md_black_1000"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_insetEdge="bottom"
+        app:tint="@color/md_white_1000" />
+
 
 
 

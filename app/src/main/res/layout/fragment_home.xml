@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,25 +13,42 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerRecipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-317dp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_button"
-            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/floating_button"-->
+<!--            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_marginBottom="55dp"-->
+<!--            android:src="@drawable/ic_create_white_48dp"-->
+<!--            android:contentDescription="Viết món mới"-->
+<!--            android:text="Viết món mới"-->
+<!--            app:backgroundTint="@color/colorPrimary"-->
+<!--            app:elevation="10dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_insetEdge="bottom"-->
+<!--            app:tint="@color/md_white_1000" />-->
+
+        <ProgressBar
+            android:id="@+id/loading"
+            style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="55dp"
-            android:src="@drawable/ic_create_white_48dp"
-            android:contentDescription="Viết món mới"
-            android:text="Viết món mới"
-            app:backgroundTint="@color/colorPrimary"
-            app:elevation="10dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:visibility="visible"
+            android:indeterminateDuration="@android:integer/config_longAnimTime"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/custom_progress_dialog"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_insetEdge="bottom"
-            app:tint="@color/md_white_1000" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

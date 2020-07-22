@@ -6,14 +6,219 @@
     android:layout_height="match_parent"
     tools:context=".activities.SignUpActivity">
 
-
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/nameTitleSignUp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SignUp - Đăng ký view"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="339dp"
-        tools:ignore="MissingConstraints" />
+        android:fontFamily="@font/open_sans_light"
+        android:gravity="center"
+        android:text="Đăng Ký"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_signUp_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:hint="Email"
+        android:fontFamily="@font/open_sans_light"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/nameTitleSignUp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_signUp_fullName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Họ tên"
+        android:fontFamily="@font/open_sans_light"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/edt_signUp_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_signUp_displayName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Tên hiển thị"
+        android:fontFamily="@font/open_sans_light"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/edt_signUp_fullName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_signUp_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Mật khẩu"
+        android:fontFamily="@font/open_sans_light"
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/edt_signUp_displayName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_signUp_repeatPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Nhập lại mật khẩu"
+        android:fontFamily="@font/open_sans_light"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/edt_signUp_password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_signUp_birthday"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Ngày sinh"
+        android:fontFamily="@font/open_sans_light"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/edt_signUp_repeatPassword">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="date" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/edt_signUp_gender"
+        android:checkedButton="@+id/radio_button_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:gravity="left|center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_signUp_birthday">
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_weight="1"
+            android:textColor="@color/md_black_1000"
+            android:fontFamily="@font/open_sans_light"
+            android:textSize="18sp"
+            android:text="Giới tính:" />
+
+        <RadioButton
+            android:id="@+id/radio_button_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/md_black_1000"
+            android:fontFamily="@font/open_sans_light"
+            android:textSize="18sp"
+            android:text="Nam"/>
+
+        <RadioButton
+            android:id="@+id/radio_button_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/md_black_1000"
+            android:fontFamily="@font/open_sans_light"
+            android:textSize="18sp"
+            android:text="Nữ"/>
+
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_signUp_save"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:text="Lưu"
+        android:textSize="18sp"
+        android:fontFamily="@font/open_sans_light"
+        app:cornerRadius="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_signUp_cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_signUp_gender" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_signUp_cancel"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="10dp"
+        android:text="Huỷ"
+        android:textColor="@color/md_black_1000"
+        android:textSize="18sp"
+        android:fontFamily="@font/open_sans_light"
+        app:cornerRadius="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_signUp_save"
+        app:layout_constraintTop_toBottomOf="@+id/edt_signUp_gender" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

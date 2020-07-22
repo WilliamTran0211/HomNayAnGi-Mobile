@@ -1,11 +1,9 @@
 package com.cuongtt.homnayangi.fragments;
 
-import android.app.Activity;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -14,27 +12,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cuongtt.homnayangi.R;
 import com.cuongtt.homnayangi.activities.LoginActivity;
-import com.cuongtt.homnayangi.activities.MainActivity;
-import com.cuongtt.homnayangi.activities.RecipeDetailActivity;
-import com.cuongtt.homnayangi.activities.RecipeFormActivity;
 import com.cuongtt.homnayangi.models.Users;
 import com.cuongtt.homnayangi.network.APIService;
 import com.cuongtt.homnayangi.network.ApiUtils;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
-import com.pixplicity.easyprefs.library.Prefs;
 
 import java.text.SimpleDateFormat;
+import java.util.concurrent.Executor;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.content.Context.MODE_PRIVATE;
 
 
 public class UserFragment extends Fragment {
@@ -42,6 +41,9 @@ public class UserFragment extends Fragment {
     ImageView imgView;
     TextView displayName, fullName, birthday, gender, email;
     Button logoutButton;
+    ProgressBar loading;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
     public UserFragment() {
         // Required empty public constructor
@@ -66,6 +68,10 @@ public class UserFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user, container, false);
 
+        loading = view.findViewById(R.id.loading);
+        loading.setVisibility(View.VISIBLE);
+
+
         Log.d("DEBUGGGGGGGGGG", "User Fragment - onCreateView");
 
 
@@ -82,11 +88,7 @@ public class UserFragment extends Fragment {
         gender = view.findViewById(R.id.txtGender);
         email = view.findViewById(R.id.txtEmail);
 
-
-
         fetchUserInfo(obj.getId());
-
-
 
         logoutButton = view.findViewById(R.id.btnDangXuat);
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +98,7 @@ public class UserFragment extends Fragment {
                 Intent intent = new Intent(view.getContext(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-
+                signOut();
             }
         });
 
@@ -105,8 +107,36 @@ public class UserFragment extends Fragment {
         return view;
     }
 
+
+    private void signOut() {
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+    }
+
+//    private void revokeAccess() {
+//        mGoogleSignInClient.revokeAccess()
+//                .addOnCompleteListener((Executor) this, new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        // ...
+//                    }
+//                });
+//    }
+
     public void fetchUserInfo(String id){
-        mAPIService.getUserInfo(id).enqueue(new Callback<Users>() {
+        mAPIService.getUserInfoWithID(id).enqueue(new Callback<Users>() {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
                 if(response.isSuccessful()){
@@ -130,6 +160,8 @@ public class UserFragment extends Fragment {
                     }else{
                         gender.setText("Nữ");
                     }
+
+                    loading.setVisibility(View.GONE);
 
                 }
             }

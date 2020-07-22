@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.cuongtt.homnayangi.R;
 import com.cuongtt.homnayangi.activities.AddIngredientDialog;
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Recipes> recipes_list;
 
     FloatingActionButton fab;
+    ProgressBar loadingBar;
 
 
     public HomeFragment() {
@@ -73,6 +75,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        loadingBar = view.findViewById(R.id.loading);
+        loadingBar.setVisibility(View.VISIBLE);
+
 
         recyclerView = view.findViewById(R.id.recyclerRecipe);
         recipes_list = new ArrayList<Recipes>();
@@ -90,16 +95,19 @@ public class HomeFragment extends Fragment {
         fletchRecipesItems();
         System.out.println(recipes_list);
 
-        fab = view.findViewById(R.id.floating_button);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment newRecipeDialog = AddRecipeDialog.newInstance();
-                newRecipeDialog.show(getFragmentManager(), "newRecipeDialog");
+//        fab = view.findViewById(R.id.floating_button);
+//
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DialogFragment newRecipeDialog = AddRecipeDialog.newInstance();
+//                newRecipeDialog.show(getFragmentManager(), "newRecipeDialog");
+//
+//            }
+//        });
 
-            }
-        });
+
 
 
         return view;
@@ -125,6 +133,7 @@ public class HomeFragment extends Fragment {
                     recipes_list.addAll(items);
 
                     getRecipesImages();
+
 
 
                 }
@@ -163,6 +172,7 @@ public class HomeFragment extends Fragment {
 
                         recipesAdapter.notifyDataSetChanged();
 
+                        loadingBar.setVisibility(View.GONE);
                     }
                 }
 
